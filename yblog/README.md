@@ -1,7 +1,5 @@
-# yblog  我的个人博客项目 # 
+# yblog  Web课程设计-个人博客项目 # 
 基于 SpringBoot 2.0.4.RELEASE + Mybatis + MySQL + Vue + Element 搭建的个人博客。
-
-博客访问地址：[杨号个人博客：http://imyanger.com](http://imyanger.com)。
 
 ### 前言 ###
 该项目采用前后端分离，后端主要采用SpringBoot + Mybatis + MySQL ，前端基于Vue  + Element 。
@@ -38,9 +36,9 @@
 
 ### 项目部署 ###
 
-[后端部署详细说明](https://github.com/imyanger/yblog/blob/master/yanger/README.md)
+[后端部署详细说明](https://github.com/Charltin/Vue-Springboot-blog-design/blob/main/yblog/README.md)
 
-[前端部署详细说明](https://github.com/imyanger/yblog/blob/master/yanger-app/README.md)
+[前端部署详细说明](https://github.com/Charltin/Vue-Springboot-blog-design/blob/main/webDesign/README.md)
 
 * 项目前端访问默认端口为：8080
 * 项目在功能上分为博客门户和博客管理平台，且两者用户分开使用
@@ -50,5 +48,3 @@
   * 博客管理平台默认用户：
     * 账号：admin123
     * 密码：admin123
-
-#### [项目部分截图查看](https://github.com/imyanger/yblog/blob/master/doc/img/README.md)
