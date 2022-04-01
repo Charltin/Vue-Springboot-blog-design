@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- ============================================================== -->
+<!-- ================可直接使用Base配置文件中定义的节点============== -->
+<!-- ============================================================== -->
+<mapper namespace="com.yanger.blog.dao.ArticleKindDao">
+
+	<!-- 查询所有文章分类数据 -->
+	<select id="findAll" resultMap="BaseResultMap" parameterType="String">
+		select
+			<include refid="Base_Column_List" />
+		from article_kind where status = '1' and module = #{_parameter}
+	</select>
+
+	<select id="selectSummary" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from article_kind
+	</select>
+	
+	<delete id="deleteAll">
+		DELETE FROM article_kind;
+		-- ALTER TABLE article_kind AUTO_INCREMENT = 1;
+	</delete>
+
+	<insert id="dealSummaryData" useGeneratedKeys="false">
+		INSERT INTO article_kind(module, `type`, `classify`, `sum`, `status`, `insert_time`)
+		SELECT article.module, article.type, article.classify, COUNT(*) AS article_sum, '1', NOW() FROM article article
+		GROUP BY article.module, article.type, article.classify;
+	</insert>
+
+	<select id="dateSum" resultType="com.yanger.blog.po.DateSum" parameterType="string">
+		SELECT DATE_FORMAT(insert_time,"%Y-%m") AS artDate ,COUNT(*) as sum FROM article
+		<if test="type != null">
+		  	WHERE module = #{type}
+		</if>
+		GROUP BY DATE_FORMAT(insert_time,"%Y-%m") ORDER BY DATE_FORMAT(insert_time,"%Y-%m") DESC ;
+	</select>
+
+</mapper>

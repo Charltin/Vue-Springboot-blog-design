@@ -1,0 +1,67 @@
+#mybatis配置
+mybatis:
+  typeAliasesPackage: com.yanger.*.po
+  mapperLocations: classpath*:mapper/**/*Dao.xml
+  executor-type: REUSE
+  configuration:
+    #打印sql
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    mapUnderscoreToCamelCase: true
+      
+#spring配置
+spring:
+  profiles:
+    active: dev
+    #active: prod
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 连接池配置
+    tomcat:
+      initial-size: 5
+      minIdle: 5
+      maxActive: 20
+      # 连接等待超时时间
+      maxWait: 60000
+      # 配置隔多久进行一次检测(检测可以关闭的空闲连接)
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置连接在池中的最小生存时间
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  servlet:
+    multipart:
+      #设置上传文件大小
+      max-file-size: 10MB
+      max-request-size: 10MB
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 0
+    timeout: 30000
+    jedis:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制）
+        max-active: 8
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: 30
+        # 连接池中的最大空闲连接
+        max-idle: 5
+        # 连接池中的最小空闲连接
+        min-idle: 0
+  cache:
+    type: redis     
+  session:
+    store-type: redis
+      
+server:
+  port: 8080
+  servlet:
+     context-path: /api/core
+ 
+ #日志等级
+logging:
+  pattern:
+    level: DEBUG

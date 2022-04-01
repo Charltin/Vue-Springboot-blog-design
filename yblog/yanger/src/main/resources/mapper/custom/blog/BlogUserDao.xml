@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- ============================================================== -->
+<!-- ================可直接使用Base配置文件中定义的节点============== -->
+<!-- ============================================================== -->
+<mapper namespace="com.yanger.blog.dao.BlogUserDao">
+
+	<select id="findLoginUser" resultMap="BaseResultMap">
+		select
+			<include refid="Base_Column_List" />
+		from blog_user
+		where (user_code = #{code} or moblie = #{code} or email = #{code}) and password = #{pwd} and user_type = #{type}
+	</select>
+
+	<select id="findUserByCode" resultMap="BaseResultMap" parameterType="String">
+		select
+			<include refid="Base_Column_List" />
+		from blog_user
+		where user_code = #{code} or moblie = #{code} or email = #{code}
+	</select>
+	
+	<!-- 按对象查询一页记录（多条记录） -->
+	<select id="selectPageByVo" resultMap="BaseResultMap" parameterType="com.yanger.blog.vo.BlogUserVo">
+		select
+			<include refid="Base_Column_List" />
+		from blog_user
+		<where>
+			<include refid="Base_Select_By_Entity_Where" />
+		</where>
+	</select>
+
+</mapper>

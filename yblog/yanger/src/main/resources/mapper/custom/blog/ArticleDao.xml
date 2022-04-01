@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- ============================================================== -->
+<!-- ================可直接使用Base配置文件中定义的节点============== -->
+<!-- ============================================================== -->
+<mapper namespace="com.yanger.blog.dao.ArticleDao">
+ 
+  	<!-- 根据vo进行查询 -->
+	<select id="selectPageByVo" resultMap="BaseResultMap" parameterType="com.yanger.blog.vo.ArticleVo">
+		select
+			<include refid="Base_Column_List" />
+		from article
+		<where>
+			<include refid="Base_Select_By_Entity_Where" />
+			<include refid="Entity_Where_queryValue" />
+		</where>
+	</select>
+  
+  	<sql id="Entity_Where_queryValue">
+  		<if test="queryValue != null" >
+			and (rux_words like "%"#{queryValue}"%" or title like "%"#{queryValue}"%" or type = #{queryValue} or classify = #{queryValue})
+		</if>
+		<if test="artDate != null" >
+			and DATE_FORMAT(insert_time,"%Y-%m") = #{artDate}
+		</if>
+  	</sql>
+
+	<update id="updateState" parameterType="map">
+		UPDATE article SET art_state = #{state} WHERE article_id = #{id}
+	</update>
+
+	<!-- 按对象查询一页记录（多条记录） -->
+	<select id="getHotArts" resultMap="BaseResultMap" parameterType="com.yanger.blog.po.Article">
+		select article_id, title, likes, views from article
+		<where>
+			<include refid="Base_Select_By_Entity_Where" />
+		</where>
+	</select>
+
+	<update id="updateCommons" parameterType="map">
+		UPDATE article SET commons = commons + 1 WHERE article_id = #{id}
+	</update>
+
+	<update id="updateLikes" parameterType="map">
+		UPDATE article SET likes = likes + 1 WHERE article_id = #{id}
+	</update>
+
+	<update id="updateViews" parameterType="map">
+		UPDATE article SET views = views + 1 WHERE article_id = #{id}
+	</update>
+	
+	<select id="getLikes" parameterType="map" resultType="int">
+		SELECT likes FROM article WHERE article_id = #{id}
+	</select>
+  
+</mapper>
