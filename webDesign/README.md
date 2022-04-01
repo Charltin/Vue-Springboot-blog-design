@@ -3,7 +3,7 @@
 基于Vue.js 2.x系列 + Element UI 的前端项目。
 
 ### 前言 ###
-该项目是 [yblog](https://github.com/imyanger/yblog) 的前端部分，使用 Vue.js，引入 Element UI 样式组件库，方便开发快速简洁好看的组件。
+该项目是 [yblog](https://github.com/charltin/Vue-Springboot-blog-design) 的前端部分，使用 Vue.js，引入 Element UI 样式组件库，方便开发快速简洁好看的组件。
 
 ### 支持功能 ###
 - [x] Element UI
@@ -52,7 +52,7 @@
 
    ``` she
    // 克隆项目到本地
-   git clone https://github.com/imyanger/yblog.git
+   git clone https://github.com/Charltin/Vue-Springboot-blog-design.git
    ```
 
 2. 安装项目依赖
